@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html ng-app="TestApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Lesson 11</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-controller="TestAppCtrl">
+	<script>
+	var app = angular.module("TestApp", []);
+
+	app.controller("TestAppCtrl", function($scope){
+		$scope.user = {
+			name: "Tom",
+			age: 27,
+			city: "New York"
+		};
+
+		$scope.students = [
+			{name: "Terry", course: "Angular"}, 
+			{name: "Nicky", course: "Angular2"},
+			{name: "Francis", course: "Angular"},
+			{name: "Mary", course: "Angular2"},
+			{name: "Marc", course: "Angular2"},
+			{name: "Ben", course: "Angular"},
+			{name: "Andrew", course: "Angular2"},
+			{name: "Daniel", course: "Angular2"}];
+	
+
+		$scope.showKnow = function(){
+			$scope.knowledge = ["HyperText Markup Language", "Cascading Style Sheets", "Semantically Awesome Style Sheets", "JavaScript", "jQuery"];
+		}
+
+		$scope.showCan = function(){
+			$scope.skills = ["Website development", "Front-end development", "Learning"];
+		}
+
+	});
+
+	</script>
+
+<!--       <input type="text" ng-model="name" placeholder="Enter your name">
+      <p>My name is {{name}}!</p> -->
+	<div>
+      <p>User's name is {{user.name}}.</p>
+      <p>{{user.name}} is <span ng-bind="user.age"></span> years old.</p>
+      <p ng-bind-template="So his name is {{user.name}}, he is {{user.age}} and he is from {{user.city}}."></p>
+    </div>
+
+    <div>
+    	<h3>List of students</h3>
+    	<ol>
+    		<li ng-repeat="student in students"> {{student.name}}
+				<span ng-if="$first">*</span>
+    		</li>
+    	</ol>
+
+    	<h3>Table of students and courses</h3>
+    	<table>
+    		<thead>
+	    		<tr>
+	    			<th>No.</th>
+	    			<th>Name</th>
+	    			<th>Course</th>
+	    		</tr>
+			</thead>
+
+    		<tbody>
+    			<tr ng-repeat="student in students" ng-class="$even ? 'blue' : 'grey'">
+    				<td>{{$index+1}}</td>
+    				<td>	
+    				{{student.name}}
+    					<span ng-if="$first">*</span>
+    				</td>
+    				<td>{{student.course}}</td>
+    			</tr>
+    		</tbody>
+    	</table>
+    </div>
+
+    <div>
+		<button ng-click="showKnow()"> Show knowledge</button>
+		<button ng-click="showCan()"> Show skills</button>
+		
+		
+    	<ul>
+    		<li ng-repeat="subject in knowledge">
+	    		<h4 ng-if="$first">My knowledge</h4>
+	    		{{subject}}
+    		</li>
+    	</ul>
+    	
+    	<ul>
+    		<li ng-repeat="skill in skills">
+    			<h4 ng-if="$first">My skills</h4>
+    			{{skill}}
+    		</li>
+    	</ul>
+    </div>
+	
+
+</body>
+</html>
